@@ -12,13 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TestingHextreeLabs"
         tools:targetApi="31">
-        <activity
-            android:name=".MainActivity"
+        <activity android:name=".HextreeMainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".reciever" android:exported="true">
+            <intent-filter>
+                <action android:name="io.hextree.attacksurface.ATTACK_ME" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
     </application>

